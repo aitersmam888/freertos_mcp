@@ -1,0 +1,24 @@
+# BK7252嵌入式FreeRTOS系统项目需求
+
+## 项目概述
+基于BK7252N芯片开发完整的嵌入式FreeRTOS系统，集成WiFi和BLE功能。
+
+## 功能需求
+1. FreeRTOS多任务管理
+2. WiFi连接管理（STA/AP模式）
+3. BLE通信功能
+4. 外设驱动（UART, SPI, I2C, GPIO）
+5. 系统时钟配置
+6. 内存管理
+7. 电源管理
+
+## 性能要求
+- 系统响应时间 < 10ms
+- WiFi连接建立时间 < 3s
+- BLE广播间隔可配置
+- 低功耗模式支持
+
+## 开发环境
+- 编译器：GCC ARM
+- 构建工具：MSYS2 + Make
+- 调试工具：J-Link/ST-Link

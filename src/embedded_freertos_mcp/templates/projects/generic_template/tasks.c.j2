@@ -1,0 +1,46 @@
+#include "FreeRTOS.h"
+#include "task.h"
+#include "system.h"
+
+/* 任务函数声明 */
+{% for task in tasks %}
+void {{ task.function }}(void *pvParameters);
+{% endfor %}
+
+/* 任务句柄 */
+{% for task in tasks %}
+TaskHandle_t x{{ task.name }}Handle = NULL;
+{% endfor %}
+
+/* 任务创建函数 */
+void vCreateTasks(void)
+{
+    {% for task in tasks %}
+    xTaskCreate({{ task.function }}, 
+                "{{ task.name }}", 
+                {{ task.stack_size }}, 
+                NULL, 
+                {{ task.priority }}, 
+                &x{{ task.name }}Handle);
+    {% endfor %}
+}
+
+/* 任务实现 */
+{% for task in tasks %}
+void {{ task.function }}(void *pvParameters)
+{
+    /* 任务初始化 */
+    // {{ task.description }}
+    
+    for(;;)
+    {
+        /* {{ task.name }} 主循环 */
+        {% if task.delay %}
+        vTaskDelay({{ task.delay }} / portTICK_PERIOD_MS);
+        {% endif %}
+        
+        /* 任务业务逻辑 */
+        // TODO: 实现 {{ task.name }} 功能
+    }
+}
+{% endfor %}

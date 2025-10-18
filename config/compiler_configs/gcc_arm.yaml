@@ -1,0 +1,40 @@
+# GCC ARM编译器配置
+
+compiler:
+  name: "GCC ARM Embedded"
+  version: "10.3.1"
+  toolchain: "arm-none-eabi-gcc"
+  
+  common_flags:
+    - "-mcpu=cortex-m4"
+    - "-mthumb"
+    - "-mfpu=fpv4-sp-d16"
+    - "-mfloat-abi=hard"
+    - "-O2"
+    - "-g"
+    - "-Wall"
+    - "-Wextra"
+    - "-Wpedantic"
+  
+  debug_flags:
+    - "-O0"
+    - "-g3"
+    - "-DDEBUG=1"
+  
+  release_flags:
+    - "-O3"
+    - "-DNDEBUG=1"
+  
+  linker_flags:
+    - "-nostartfiles"
+    - "-nostdlib"
+    - "-Wl,--gc-sections"
+    - "-Wl,-Map=output.map"
+
+  paths:
+    bin_dir: "C:/msys64/mingw64/bin"
+    include_dirs:
+      - "./inc"
+      - "./freertos/Source/include"
+    library_dirs:
+      - "./lib"

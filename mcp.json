@@ -1,0 +1,76 @@
+{
+    "name": "embedded-freertos-mcp",
+    "version": "1.0.0",
+    "description": "文心快码扩展MCP - 专业嵌入式FreeRTOS开发工具，支持BK7252等芯片",
+    "type": "server",
+    "entry_point": "embedded_freertos_mcp",
+    "config_schema": {
+        "knowledge_base_path": {
+            "type": "string",
+            "description": "知识库路径",
+            "default": "./knowledge_base"
+        },
+        "compiler_path": {
+            "type": "string", 
+            "description": "GCC ARM工具链路径",
+            "default": "C:/msys64/mingw64/bin"
+        },
+        "msys2_path": {
+            "type": "string",
+            "description": "MSYS2安装路径",
+            "default": "C:/msys64"
+        },
+        "default_mcu": {
+            "type": "string",
+            "description": "默认MCU系列",
+            "default": "bk7252"
+        },
+        "memory_db_path": {
+            "type": "string",
+            "description": "记忆库数据库路径",
+            "default": "./memory/memory.db"
+        }
+    },
+    "tools": [
+        {
+            "name": "create_embedded_project",
+            "description": "创建完整的嵌入式FreeRTOS项目，自动读取芯片知识库"
+        },
+        {
+            "name": "generate_freertos_tasks",
+            "description": "生成FreeRTOS任务代码"
+        },
+        {
+            "name": "configure_mcu_peripherals",
+            "description": "配置MCU外设"
+        },
+        {
+            "name": "analyze_memory_usage",
+            "description": "分析堆栈使用情况"
+        },
+        {
+            "name": "generate_build_system",
+            "description": "生成Makefile构建系统"
+        },
+        {
+            "name": "search_knowledge_base",
+            "description": "搜索芯片规格书和文档"
+        },
+        {
+            "name": "get_chip_info",
+            "description": "获取芯片详细信息"
+        },
+        {
+            "name": "generate_driver_code",
+            "description": "生成外设驱动代码"
+        },
+        {
+            "name": "save_project_memory",
+            "description": "保存项目配置到记忆库"
+        },
+        {
+            "name": "load_project_memory",
+            "description": "从记忆库加载项目配置"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+# {{ project_name }} Makefile
+PROJECT_NAME = {{ project_name }}
+MCU = {{ mcu_core }}
+
+# 工具链配置
+CC = arm-none-eabi-gcc
+OBJCOPY = arm-none-eabi-objcopy
+SIZE = arm-none-eabi-size
+
+# 编译选项
+CFLAGS = {{ compiler_flags | join(' ') }}
+CFLAGS += -I./inc -I./freertos/Config -I./freertos/Source/include
+CFLAGS += -D{{ chip_family | upper }}
+
+# 源文件
+SRCS = $(wildcard src/*.c) $(wildcard src/tasks/src/*.c) $(wildcard drivers/*/*.c)
+SRCS += freertos/Source/tasks.c freertos/Source/queue.c freertos/Source/list.c
+SRCS += freertos/Source/timers.c freertos/Source/event_groups.c
+SRCS += freertos/Source/portable/GCC/ARM_CM4F/port.c
+SRCS += freertos/Source/portable/MemMang/heap_4.c
+
+# 目标文件
+OBJS = $(SRCS:.c=.o)
+
+# 默认目标
+all: $(PROJECT_NAME).elf
+
+$(PROJECT_NAME).elf: $(OBJS)
+	$(CC) $(CFLAGS) -T linker_script.ld -o $@ $^
+	$(SIZE) $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(OBJS) $(PROJECT_NAME).elf
+
+flash: $(PROJECT_NAME).elf
+	# 烧录命令
+
+.PHONY: all clean flash

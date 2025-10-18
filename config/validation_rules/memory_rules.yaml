@@ -1,0 +1,25 @@
+# 内存验证规则
+memory_validation:
+  max_stack_usage_percentage: 60
+  min_task_stack_size: 128
+  max_heap_usage_percentage: 80
+  stack_overflow_check: true
+  heap_fragmentation_check: true
+
+stack_validation:
+  min_stack_size: 128
+  recommended_stack_sizes:
+    system_task: 512
+    network_task: 1024
+    user_interface_task: 768
+    data_processing_task: 512
+    peripheral_task: 256
+
+heap_validation:
+  min_free_heap: 4096
+  fragmentation_threshold: 30
+  allocation_patterns:
+    - pattern: "pvPortMalloc"
+      description: "动态内存分配"
+    - pattern: "vPortFree"
+      description: "内存释放"

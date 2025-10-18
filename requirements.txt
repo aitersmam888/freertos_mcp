@@ -1,0 +1,14 @@
+# 嵌入式FreeRTOS MCP扩展依赖
+
+# MCP框架 (如果可用)
+mcp>=1.0.0
+
+# 核心依赖
+pydantic>=2.0.0
+pyyaml>=6.0
+typing-extensions>=4.0.0
+
+# 开发工具
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0

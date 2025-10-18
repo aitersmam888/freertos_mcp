@@ -1,0 +1,75 @@
+#include "FreeRTOS.h"
+#include "task.h"
+#include "system.h"
+#include "wifi.h"
+#include "ble.h"
+
+/* BK7252N IoT网关项目: {{ project_name }} */
+
+int main(void)
+{
+    /* 系统初始化 */
+    System_Init();
+    
+    /* 创建IoT网关任务 */
+    xTaskCreate(vWiFiTask, "WiFi", 2048, NULL, 2, NULL);
+    xTaskCreate(vBLETask, "BLE", 1536, NULL, 2, NULL);
+    xTaskCreate(vDataProcessingTask, "DataProc", 1024, NULL, 1, NULL);
+    xTaskCreate(vSystemMonitorTask, "Monitor", 512, NULL, 1, NULL);
+    
+    /* 启动调度器 */
+    vTaskStartScheduler();
+    
+    /* 程序不应执行到这里 */
+    while(1);
+}
+
+void vWiFiTask(void *pvParameters)
+{
+    /* WiFi连接管理 */
+    WiFi_Init();
+    
+    for(;;)
+    {
+        /* 处理WiFi连接 */
+        WiFi_Process();
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void vBLETask(void *pvParameters)
+{
+    /* BLE通信管理 */
+    BLE_Init();
+    
+    for(;;)
+    {
+        /* 处理BLE通信 */
+        BLE_Process();
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
+}
+
+void vDataProcessingTask(void *pvParameters)
+{
+    /* 数据处理任务 */
+    
+    for(;;)
+    {
+        /* 处理传感器数据 */
+        Process_Sensor_Data();
+        vTaskDelay(200 / portTICK_PERIOD_MS);
+    }
+}
+
+void vSystemMonitorTask(void *pvParameters)
+{
+    /* 系统监控任务 */
+    
+    for(;;)
+    {
+        /* 监控系统状态 */
+        Monitor_System_Status();
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
+    }
+}
