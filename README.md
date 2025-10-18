@@ -35,7 +35,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-repo/embedded_freertos_mcp.git
+git clone https://github.com/aitersmam888/freertos_mcp.git
 cd embedded_freertos_mcp
 
 # 安装Python依赖
